@@ -8,7 +8,14 @@ var client = net.connect(1099, function(){
 
 function connectToServer() {
 	var WebSocket = require('ws');
-	var ws = new WebSocket('ws://lights.edc.me/websocket');
+	var ws = new WebSocket('ws://example.com/websocket');
+	ws.on('error', function() {
+	    console.log('error...retrying in 5 seconds...');
+	    ws = null;
+	    setTimeout((function() {
+			connectToServer();
+		}), 5000);
+	});
 	ws.on('close', function() {
 	    console.log('disconnected...reconnecting...');
 	    ws.terminate();
