@@ -5,7 +5,7 @@ var zone = 1;
 var scheduledEvents = new Array();
 
 var WebSocket = require('ws');
-var ws = new WebSocket('ws://lights.edc.me/websocket');
+var ws = new WebSocket('ws://example.com/websocket');
 
 var serialPort = new SerialPort("/dev/ttyAMA0", {
   baudrate: 38400
