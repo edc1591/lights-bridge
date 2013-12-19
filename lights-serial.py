@@ -50,7 +50,7 @@ def on_open(ws):
 if __name__ == "__main__":
     websocket.enableTrace(True)
     if len(sys.argv) < 2:
-        host = "ws://lights.edc.me/websocket"
+        host = "ws://example.com/websocket"
     else:
         host = sys.argv[1]
     ws = websocket.WebSocketApp(host,
