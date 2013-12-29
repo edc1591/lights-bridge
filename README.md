@@ -4,7 +4,7 @@ Lights-Bridge is a collection of apps that communicate with RGB LEDs and X10 dev
 
 ## Links
 
-* Documentation: <http://edc.me/lights/documentation.html>
+* Documentation: <https://github.com/edc1591/lights-rails/wiki>
 * Lights iOS app: <https://github.com/edc1591/Lights-iOS>
 * Lights-Rails backend: <https://github.com/edc1591/lights-rails>
 
