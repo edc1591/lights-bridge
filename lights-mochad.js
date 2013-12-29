@@ -32,7 +32,7 @@ function connectToServer() {
 	    if (jss[0] == 'command') {
 		    var js = jss[1].data;
 		    console.log('Data: ' + JSON.stringify(js));
-	    	if(js.event == 9 && js.zone == zone) {
+	    	if(js.eventType == 9 && js.zone == zone) {
 	    		// Send X10 Event
 		    	console.log('Sending Event');
 		    	var house = String.fromCharCode(64+js.houseCode);
@@ -47,7 +47,7 @@ function connectToServer() {
 	    		setTimeout((function() {
 	    			var device = js[x];
 	    			console.log('Data: ' + JSON.stringify(device));
-	    			if(device.event == 9 && device.zone == zone) {
+	    			if(device.eventType == 9 && device.zone == zone) {
 			    		var house = String.fromCharCode(64+device.houseCode)
 			    		var ncCommand = 'rf '+house+device.device+' '+commandFromInt(device.command)+'\n';
 			    		console.log(ncCommand);
