@@ -14,8 +14,8 @@ zone = 1
 ser = serial.Serial(PORT, BAUD)
 
 def on_close(ws):
-	print('Closed Socket')
-	ser.close()
+	print('Closed Socket, reopening')
+	open_socket()
 
 def on_message(ws, message):
 	print(message)
@@ -27,7 +27,13 @@ def on_message(ws, message):
 		print('pong')
 		ws.send(json.dumps(['websocket_rails.pong', {'data': ''}]))
 	elif sentCommand == "command":
-		handle_event(obj[1]['data'])
+		if obj[1]['data']['zone_id'] == zone:
+			handle_event(obj[1]['data'])
+	elif sentCommand == "command_collection":
+		for action in obj[1]['data']['events']:
+			if action['zone_id'] == zone:
+				handle_event(action)
+				time.sleep(1.5)
 
 def on_error(ws, error):
     print(error)
@@ -46,16 +52,16 @@ def handle_event(data):
 		ser.write('x10command('+str(data['device'])+','+str(data['houseCode'])+','+str(data['command'])+')')
 	ser.write(chr(13))
 	time.sleep(0.02)
+	
+def open_socket():
+	websocket.enableTrace(True)
+	host = "ws://example.com/websocket"
+	ws = websocket.WebSocketApp(host,
+								on_message = on_message,
+								on_error = on_error,
+								on_close = on_close)
+	ws.on_open = on_open
+	ws.run_forever()
     
 if __name__ == "__main__":
-    websocket.enableTrace(True)
-    if len(sys.argv) < 2:
-        host = "ws://lights.edc.me/websocket"
-    else:
-        host = sys.argv[1]
-    ws = websocket.WebSocketApp(host,
-                                on_message = on_message,
-                                on_error = on_error,
-                                on_close = on_close)
-    ws.on_open = on_open
-    ws.run_forever()
+    open_socket()
