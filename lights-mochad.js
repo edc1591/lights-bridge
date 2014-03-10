@@ -8,7 +8,7 @@ var client = net.connect(1099, function(){
 
 function connectToServer() {
 	var WebSocket = require('ws');
-	var ws = new WebSocket('ws://example.com/websocket');
+	var ws = new WebSocket('ws://example.com/websocket?zone_id=' + zone);
 	ws.on('error', function() {
 	    console.log('error...retrying in 5 seconds...');
 	    ws = null;

@@ -55,7 +55,7 @@ def handle_event(data):
 	
 def open_socket():
 	websocket.enableTrace(True)
-	host = "ws://example.com/websocket"
+	host = "ws://example.com/websocket?zone_id="+str(zone)
 	ws = websocket.WebSocketApp(host,
 								on_message = on_message,
 								on_error = on_error,
