@@ -1,0 +1,11 @@
+{
+  "name": "lights-bridge",
+  "version": "1.0.0",
+  "description": "Bridge commands from HAP-NodeJS to X10 devices",
+  "main": "index.js",
+  "author": "Evan Coleman",
+  "license": "MIT",
+  "dependencies": {
+    "request": "~> 2.47"
+  }
+}
